@@ -1,0 +1,20 @@
+app = "word-peace" # 部署时可以修改为你想要的名称
+primary_region = "hkg" # 推荐香港(hkg)、日本(nrt)或美西(sjc)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3000"
+  # 在这里修改你的 UUID 和 WSPATH（或者通过 fly secrets 设置更安全）
+  UUID = "b8596c11-691a-4f72-b05d-d867e60af1c6"
+  WSPATH = "b8596c11"
+  DEBUG = "false"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false # 代理服务建议关闭自动休眠，防止断流
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
