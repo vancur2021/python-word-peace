@@ -1,5 +1,5 @@
 app = "word-peace" # 部署时可以修改为你想要的名称
-primary_region = "hkg" # 推荐香港(hkg)、日本(nrt)或美西(sjc)
+primary_region = "nrt" # 推荐香港(hkg)、日本(nrt)或美西(sjc)
 
 [build]
   dockerfile = "Dockerfile"
