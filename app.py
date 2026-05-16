@@ -444,8 +444,8 @@ async def websocket_handler(request):
             logger.warning("Max concurrent connections reached. Dropping new connection.")
         return web.Response(status=503, text="Service Unavailable")
 
-    # 增加 heartbeat 控制 (25秒)，防止 PaaS/Serverless 平台的系统网关自杀式断开长连接
-    ws = web.WebSocketResponse(heartbeat=25.0)
+    # 移除服务端 heartbeat 控制，交由客户端主动保活，防止 iOS 息屏/后台时因无法回复 Pong 导致服务端主动断开
+    ws = web.WebSocketResponse()
     await ws.prepare(request)
     CUUID = UUID.replace('-', '')
     path = request.path
